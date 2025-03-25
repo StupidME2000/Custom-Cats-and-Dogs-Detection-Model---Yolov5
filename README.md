@@ -6,12 +6,13 @@ This repository contains a custom object detection pipeline based on YOLOv5, inc
 ## Project Structure
 ```
 ├── colab - Notebook/               # Contains Colab notebook and necessary files to run on Google Colab
-│   ├── Assesment_YoloV5.ipynb
+│   ├── Custom_Object_Detection_YoloV5.ipynb
 │   ├── train_val_split.py
 │   └── data.zip
 │
-├── model/               # Exported model and testing scripts
+├── Model/               # Exported model and testing scripts
 │   ├── model            # Trained YOLOv5 model
+│   ├── model.pt 
 │   ├── yolo_detect.py   # Custom script to test on new images
 │   ├── test.jpg/        # Sample inference images
 │
@@ -25,50 +26,55 @@ This repository contains a custom object detection pipeline based on YOLOv5, inc
 
 ## Getting Started
 
-### 1. Train the Model
+### Train the Model
 Run the Colab notebook to train the model.
-1. Open `colab/object_detection_notebook.ipynb` in Google Colab.
+1. Open [Custom_Object_Detection_YoloV5.ipynb](https://github.com/StupidME2000/Custom-Cats-and-Dogs-Detection-Model---Yolov5/blob/main/Colab%20-%20Notebook/Custom_Object_Detection_YoloV5.ipynb) in Google Colab.
 2. Follow the instructions to train YOLOv5 on the labeled dataset.
-3. The best-trained model will be saved as `best_model.pt`.
+3. The best-trained model will be saved as `model.pt`.
 
-
-
-
-
+## Custom Testing
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/StupidME2000/Custom-Cats-and-Dogs-Detection-Model---Yolov5.git
+cd Custom-Cats-and-Dogs-Detection-Model---Yolov5
 ```
 
-### 2. Install Dependencies
-For Colab:
-```bash
-pip install -r colab/requirements.txt
-```
-For Local Environment:
-```bash
-pip install torch torchvision numpy opencv-python label-studio
-```
+### 2. Install Dependencies  
 
-### 3. Train the Model
-Run the Colab notebook to train the model.
-1. Open `colab/object_detection_notebook.ipynb` in Google Colab.
-2. Follow the instructions to train YOLOv5 on the labeled dataset.
-3. The best-trained model will be saved as `best_model.pt`.
+#### For Local Environment:  
 
-### 4. Custom Testing
-Use the provided script to test the model on new images:
-```bash
-python model/test_script.py --image path/to/image.jpg
-```
-Results will be saved in the `inference/` folder.
+1. First, create a Conda environment:  
+   ```bash
+   conda create --name Yolov5-env1
+   conda activate Yolov5-env1
+   ```  
+
+2. Navigate to the model folder:  
+   ```bash
+   cd <path_to_model_folder>
+   ```  
+
+3. Install the Ultralytics library:  
+   ```bash
+   pip install ultralytics
+   ```  
+
+4. To test the model:  
+   ```bash
+   python yolo_detect.py --mode model.pt --source test.jpg
+   ```  
+   The `yolo_detect.py` script supports various input sources, including:  
+   - Live camera feed  
+   - Video files  
+   - A folder of images  
+
+   You can modify the `--source` parameter accordingly to test different inputs.
+
 
 ## Dataset Preparation
-- The dataset consists of manually collected images stored in `dataset/raw_images/`.
-- Labels were created using Label Studio and stored in `dataset/labeled_data/`.
-- Annotations are converted into YOLO format and stored in `dataset/annotations/`.
+- The dataset consists of manually collected images stored in `dataset/Dataset - Unlabled/`.
+- Labels were created using Label Studio and stored in `Dataset - labled/`.
 
 ## Novel Bounding Box Similarity Metric
 This project introduces a novel similarity metric that enhances traditional IoU by incorporating:
@@ -87,15 +93,3 @@ The trained YOLOv5 model achieves [add performance metrics here] on the custom d
 - Improve dataset diversity
 - Optimize hyperparameters for better accuracy
 - Integrate with real-time inference applications
-
-## Contributing
-Feel free to fork this repository and submit pull requests for improvements or fixes.
-
-## License
-This project is licensed under the MIT License.
-
----
-
-### Contact
-For any questions or collaboration inquiries, reach out via [your email or GitHub profile].
-
